@@ -6,14 +6,12 @@ function Student(name, gender, age) {
 }
 
 Student.prototype.setSubject = function (subjectName) {
-  this.subjectName = subjectName;
+  this.subject = subjectName;
 }
 
 Student.prototype.addMarks = function (...marks) {
   if (this.hasOwnProperty("marks")) {
-    for (let mark of marks) {
-        this.marks.push(mark);
-    }
+    this.marks.push(...marks);
   }
 }
 
@@ -25,7 +23,7 @@ Student.prototype.getAverage = function () {
 }
 
 Student.prototype.exclude = function (reason) {
-  delete this.subjectName;
+  delete this.subject;
   delete this.marks;
-  this.reason = reason;
+  this.excluded = reason;
 }
