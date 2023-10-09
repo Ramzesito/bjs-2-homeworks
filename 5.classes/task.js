@@ -85,15 +85,58 @@ class Library {
 
 // тестовый сценарий
 
-let centerLib = new Library("Центральная городская");
-centerLib.addBook(new Magazine("Журнал Самоделкин", 2014, 60));
-centerLib.addBook(new Book("Иванов И.И.", "Учебник Родная речь", 2019, 85));
-centerLib.addBook(new DetectiveBook("Конан Дойль", "Собака Баскервиллей", 1990, 190));
-centerLib.addBook(new FantasticBook("Жюль Верн", "1000 лье под водой", 1919, 320));
-console.log("Количество книг до выдачи: " + centerLib.books.length); 
-let givenBook = centerLib.giveBookByName("Собака Баскервиллей");
-console.log("Количество книг после выдачи: " + centerLib.books.length); 
-givenBook.state = 25;
-givenBook.fix();
-centerLib.addBook(givenBook);
-console.log(centerLib.books);
+// let centerLib = new Library("Центральная городская");
+// centerLib.addBook(new Magazine("Журнал Самоделкин", 2014, 60));
+// centerLib.addBook(new Book("Иванов И.И.", "Учебник Родная речь", 2019, 85));
+// centerLib.addBook(new DetectiveBook("Конан Дойль", "Собака Баскервиллей", 1990, 190));
+// centerLib.addBook(new FantasticBook("Жюль Верн", "1000 лье под водой", 1919, 320));
+// console.log("Количество книг до выдачи: " + centerLib.books.length); 
+// let givenBook = centerLib.giveBookByName("Собака Баскервиллей");
+// console.log("Количество книг после выдачи: " + centerLib.books.length); 
+// givenBook.state = 25;
+// givenBook.fix();
+// centerLib.addBook(givenBook);
+// console.log(centerLib.books);
+
+
+class Student {
+    constructor(name){
+        this.name = name;
+        this.marks = {};
+    }
+    addMark(mark, subject) {
+        if (mark < 2 || mark > 5) { return; }
+        if (!this.marks.hasOwnProperty(subject)) {
+            this.marks[subject] = [];
+        }
+        this.marks[subject].push(mark);
+    }
+    getAverageBySubject(subject) {
+        if (!this.marks.hasOwnProperty(subject)) {
+            return 0;
+        }
+        return this.marks[subject].reduce((acc, mark, idx, arr) => acc + mark / arr.length, 0); 
+    }
+    getAverage() {
+        let keys =  Object.keys(this.marks);
+        if (keys.length === 0) { return 0;}
+        let avgResult = 0;
+        for (let i = 0; i < keys.length; i++) {
+            avgResult += this.marks[keys[i]].reduce((acc, mark, idx, arr) => acc + mark / arr.length, 0); 
+        }
+        return avgResult / keys.length;
+    }
+}
+
+// тестовый сценарий
+
+// const student = new Student("Олег Никифоров");
+// student.addMark(5, "химия");
+// student.addMark(4, "химия");
+// student.addMark(3, "математика");
+// student.addMark(2, "физра");
+// student.addMark(22, "физра");
+// student.addMark(-2, "физра");
+// console.log(student.getAverageBySubject("физра"));
+// console.log(student.getAverageBySubject("астрономия"));
+// console.log(student.getAverage());
